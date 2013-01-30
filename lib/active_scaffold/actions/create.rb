@@ -83,7 +83,7 @@ module ActiveScaffold::Actions
         @old_eid = params[:eid]
         @remove_eid = true
         constraints = {params[:parent_column].to_sym => params[:parent_id]}
-        params[:eid] = Digest::MD5.hexdigest(params[:parent_controller] + params[:controller].to_s + constraints.to_s)
+        params[:eid] = Digest::MD5.hexdigest("#{params[:parent_controller]}#{params[:controller]}" + constraints.to_s)
         session["as:#{params[:eid]}"] = {:constraints => constraints}
       end
     end
